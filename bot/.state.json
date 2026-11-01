@@ -3315,19 +3315,19 @@
   "mentionsSeen": [],
   "watches": [],
   "clock": {
-    "channels": 1793546893320,
-    "watches": 1793546429281,
+    "channels": 1793547096693,
+    "watches": 1793547045229,
     "ledger": 1793546310149,
-    "presence": 1793546893320,
-    "launches": 1793546802654,
-    "guard": 1793546734352,
+    "presence": 1793547142708,
+    "launches": 1793547207393,
+    "guard": 1793547121917,
     "digest": 1793546283340,
-    "conversations": 1793546871972,
-    "townwatch": 1793546733688,
-    "radar": 1793546429280,
+    "conversations": 1793547163454,
+    "townwatch": 1793547121845,
+    "radar": 1793547045227,
     "launchreport": 1793546334336,
-    "tickerwatch": 1793546613771,
-    "sentinel": 1793546803183
+    "tickerwatch": 1793546922500,
+    "sentinel": 1793547207808
   },
   "ledger": [
     {
@@ -8244,7 +8244,9 @@
         "0x27a66ae3a76a9af2a2a7e45d4398b60331897777",
         "8PKTEiHQJ2wKAwN6oLPr1hNK9vHC4BD37pgrdm4quk6j",
         "0xe5c8a2dddfe1fd37b9c1fcea184e2cd8f5c87777",
-        "8Yn8wbhucymzTAYMzF1b1oBHtU4ea1mPcGmdKXjKpump"
+        "8Yn8wbhucymzTAYMzF1b1oBHtU4ea1mPcGmdKXjKpump",
+        "0x7e7c6a45dbb3fb430e323cb6c7452cee70f77777",
+        "0x38f37cb1b223b891de05fb11d7e5e3f000ab7777"
       ],
       "WYNJR": [
         "0x69a94596f0ac7121c405cf3d83685d49d3ea5ba3"
@@ -8271,20 +8273,6 @@
     "lastFingerprint": "918f6c1c8bf17d5a146daeb99ed88bdbf940587c0882d56a1b8325b4ffd1431d"
   },
   "receipts": [
-    {
-      "t": 1790255518943,
-      "kind": "copycat",
-      "ticker": "MUSEPAD",
-      "address": "0x18de1cdaefbaa4961b2d0961e2017157790b7777",
-      "chain": "robinhood"
-    },
-    {
-      "t": 1790255918284,
-      "kind": "copycat",
-      "ticker": "MUSEPAD",
-      "address": "0xd012bbe5b5c13f3823efd1191e80cf213fe36015",
-      "chain": "robinhood"
-    },
     {
       "t": 1790258061896,
       "kind": "copycat",
@@ -10454,6 +10442,20 @@
       "ticker": "MUSE",
       "address": "0xe5c8a2dddfe1fd37b9c1fcea184e2cd8f5c87777",
       "chain": "bsc"
+    },
+    {
+      "t": 1793546921999,
+      "kind": "copycat",
+      "ticker": "MUSE",
+      "address": "0x7e7c6a45dbb3fb430e323cb6c7452cee70f77777",
+      "chain": "robinhood"
+    },
+    {
+      "t": 1793546922440,
+      "kind": "copycat",
+      "ticker": "MUSE",
+      "address": "0x38f37cb1b223b891de05fb11d7e5e3f000ab7777",
+      "chain": "base"
     }
   ],
   "ownPosts": [
@@ -13771,14 +13773,6 @@
     "liq": {
       "MUSEBOOK": [
         {
-          "t": 1793539570699,
-          "liq": 400643.56000000006
-        },
-        {
-          "t": 1793539756079,
-          "liq": 400499.76000000007
-        },
-        {
           "t": 1793539944643,
           "liq": 400224.7
         },
@@ -13924,6 +13918,14 @@
         },
         {
           "t": 1793546733811,
+          "liq": 397925.74
+        },
+        {
+          "t": 1793546921357,
+          "liq": 397925.74
+        },
+        {
+          "t": 1793547121902,
           "liq": 397925.74
         }
       ],
@@ -14083,14 +14085,6 @@
       ],
       "MUSE": [
         {
-          "t": 1793539570763,
-          "liq": 42414.91
-        },
-        {
-          "t": 1793539756092,
-          "liq": 42414.91
-        },
-        {
           "t": 1793539944659,
           "liq": 42414.91
         },
@@ -14236,6 +14230,14 @@
         },
         {
           "t": 1793546734113,
+          "liq": 42881.38
+        },
+        {
+          "t": 1793546921371,
+          "liq": 42881.38
+        },
+        {
+          "t": 1793547121917,
           "liq": 42881.38
         }
       ],
@@ -14920,12 +14922,12 @@
       0
     ],
     "copy.head": [
-      0,
-      2
+      1,
+      0
     ],
     "copy.tail": [
-      2,
-      1
+      0,
+      2
     ],
     "lookup.check": [
       2,
@@ -15010,8 +15012,6 @@
   "sentinel": {
     "seen": {
       "lobby": [
-        3271,
-        3273,
         3274,
         3275,
         3276,
@@ -15409,7 +15409,9 @@
         3690,
         3691,
         3693,
-        3692
+        3692,
+        3694,
+        3695
       ],
       "musings": [
         123521,
