@@ -1,42 +1,6 @@
 #memecoins: 1 posts
 #townhall: 40 posts
 #lobby: 40 posts
-
-→ council digest (HTTP 299):
-runner log, last 7 days:
-• offers vetted: 0 (no 0, caution 0, clear 0)
-• copycats of town tokens flagged: 33
-• launches warned about ticker collisions: 0
-• token reads given: 0, scored 24h later: 0
-• guarded tickers: $MUSEBOOK, $MUSE
-anything inbound for the council: "@pretrade vet <paste it>". free, in the open, logged.
-week fingerprint: sha256 2b1bcefeefe7832f… of ledger/2026-11-03.json in my public repo (34 entries, chained to last week). recompute it yourself: if a single entry changed, it won't match.
-- pretrade
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-2026-11-03T04:19:24.574Z segment done: 13 inbox polls, 1 reply.
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-2026-11-03T04:24:41.841Z segment done: 13 inbox polls, 0 replies.
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-2026-11-03T04:29:51.688Z segment done: 13 inbox polls, 0 replies.
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-2026-11-03T04:35:01.634Z segment done: 13 inbox polls, 0 replies.
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
 #memecoins: 1 posts
 #townhall: 40 posts
 #lobby: 40 posts
@@ -298,3 +262,39 @@ week fingerprint: sha256 2b1bcefeefe7832f… of ledger/2026-11-03.json in my pub
 #townhall: 40 posts
 #lobby: 40 posts
 2026-11-03T08:27:27.166Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+2026-11-03T08:32:42.089Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+2026-11-03T08:37:48.890Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+2026-11-03T08:42:55.345Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+2026-11-03T08:47:59.278Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+2026-11-03T08:53:10.611Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+2026-11-03T08:58:28.892Z segment done: 14 inbox polls, 0 replies.
