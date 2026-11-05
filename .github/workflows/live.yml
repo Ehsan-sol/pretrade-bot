@@ -1,66 +1,76 @@
-name: live-bot   # ALWAYS-ON. Runs ~5h40m, polling the mentions inbox every ~20s, then starts its own successor.
-                 # Meant for the PUBLIC repo only (Actions minutes are free there). To stop the bot: disable this workflow.
-on:
+name: live-bot
+true:
   workflow_dispatch: {}
   schedule:
-    - cron: "23 * * * *"   # watchdog: if the chain ever breaks, this restarts it (queued runs collapse via concurrency)
-
+  - cron: 23 * * * *
 permissions:
   contents: write
   actions: write
-
 concurrency:
   group: live-bot
   cancel-in-progress: false
-
 jobs:
   serve:
     if: github.event.repository.private == false
     runs-on: ubuntu-latest
     timeout-minutes: 355
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20 }
-      - name: Serve
-        env:
-          MUSE_IDENTITY: ${{ secrets.MUSE_IDENTITY }}
-          BANKR_LLM_KEY: ${{ secrets.BANKR_LLM_KEY || secrets.BANKR_API_KEY }}
-          OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
-          ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}
-        run: |
-          test -n "$MUSE_IDENTITY" || { echo "MUSE_IDENTITY secret is missing"; exit 1; }
-          git config user.name "musebot"; git config user.email "musebot@users.noreply.github.com"
-          # exactly one bot is live: deploy/host says which. When the server has it, this run stands down.
-          host() { git fetch -q origin main 2>/dev/null; git show origin/main:deploy/host 2>/dev/null | tr -d '[:space:]'; }
-          if [ "$(host)" = server ]; then echo "the server is the live bot (deploy/host); standing down"; echo server > /tmp/host; exit 0; fi
-          # code comes from the live-good tag (moved by the tests workflow only when every test passes); memory stays here
-          code() { git fetch -q --depth=1 --force origin +refs/tags/live-good:refs/tags/live-good 2>/dev/null && W=$(git rev-parse live-good^{commit}) || W=$(git rev-parse HEAD)
-                   if [ ! -d /tmp/code ]; then git worktree add -q --detach /tmp/code "$W"; elif [ "$(git -C /tmp/code rev-parse HEAD)" != "$W" ]; then git -C /tmp/code checkout -q --detach "$W" && echo "code → ${W:0:7}"; fi; }
-          code; echo "running code ${W:0:7}"
-          date +%s > /tmp/started
-          END=$(( $(date +%s) + 340*60 )); LAST_PUSH=0
-          while [ "$(date +%s)" -lt "$END" ]; do
-            if [ "$(host)" = server ]; then echo "switched to the server: pushing my memory and standing down"; echo server > /tmp/host; LAST_PUSH=-99999; else
-            code
-            PRETRADE_DATA="$PWD/bot" node /tmp/code/bot/musebot.mjs serve --live --segment 5 --poll 20 2>&1 | tee /tmp/seg.log || sleep 30
-            cat /tmp/seg.log >> bot/last-run.log; tail -n 300 bot/last-run.log > /tmp/l && mv /tmp/l bot/last-run.log; fi
-            NOW=$(date +%s)
-            OB=$(md5sum bot/outbox.jsonl 2>/dev/null)   # a new draft for the Muse goes out right away
-            if ! grep -q " 0 replies\." /tmp/seg.log || [ "$OB" != "${LAST_OB:-}" ] || [ $(( NOW - LAST_PUSH )) -ge 1800 ]; then
-              LAST_OB=$OB
-              git add -f bot/.state.json bot/last-run.log; test -d bot/ledger && git add -f bot/ledger; test -d bot/radar && git add -f bot/radar; test -f bot/mentions.log && git add -f bot/mentions.log; test -f bot/shadow.log && git add -f bot/shadow.log; test -f bot/outbox.jsonl && git add -f bot/outbox.jsonl; test -f bot/corrections.log && git add -f bot/corrections.log
-              git diff --cached --quiet || { git commit -qm "state [skip ci]"; git pull -q --rebase -X theirs || git rebase --abort || true; git push -q || true; }
-              LAST_PUSH=$NOW
-            fi
-            test -f /tmp/host && break
-          done
-      - name: Hand over to the next run
-        if: always()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          RAN=$(( $(date +%s) - $(cat /tmp/started 2>/dev/null || date +%s) ))
-          if [ -f /tmp/host ]; then echo "the server is the live bot; not starting a successor"; exit 0; fi
-          if [ "$RAN" -lt 120 ]; then echo "Run lasted ${RAN}s: something is wrong, NOT restarting (the hourly watchdog will retry)."; exit 0; fi
-          gh workflow run live.yml --ref main && echo "successor started"
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Serve
+      env:
+        MUSE_IDENTITY: ${{ secrets.MUSE_IDENTITY }}
+        BANKR_LLM_KEY: ${{ secrets.BANKR_LLM_KEY || secrets.BANKR_API_KEY }}
+        OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
+        ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}
+      run: "test -n \"$MUSE_IDENTITY\" || { echo \"MUSE_IDENTITY secret is missing\"\
+        ; exit 1; }\ngit config user.name \"musebot\"; git config user.email \"musebot@users.noreply.github.com\"\
+        \n# exactly one bot is live: deploy/host says which. When the server has it,\
+        \ this run stands down.\nhost() { git fetch -q origin main 2>/dev/null; git\
+        \ show origin/main:deploy/host 2>/dev/null | tr -d '[:space:]'; }\nif [ \"\
+        $(host)\" = server ]; then echo \"the server is the live bot (deploy/host);\
+        \ standing down\"; echo server > /tmp/host; exit 0; fi\n# code comes from\
+        \ the live-good tag (moved by the tests workflow only when every test passes);\
+        \ memory stays here\ncode() { git fetch -q --depth=1 --force origin +refs/tags/live-good:refs/tags/live-good\
+        \ 2>/dev/null && W=$(git rev-parse live-good^{commit}) || W=$(git rev-parse\
+        \ HEAD)\n         if [ ! -d /tmp/code ]; then git worktree add -q --detach\
+        \ /tmp/code \"$W\"; elif [ \"$(git -C /tmp/code rev-parse HEAD)\" != \"$W\"\
+        \ ]; then git -C /tmp/code checkout -q --detach \"$W\" && echo \"code \u2192\
+        \ ${W:0:7}\"; fi; }\ncode; echo \"running code ${W:0:7}\"\ndate +%s > /tmp/started\n\
+        END=$(( $(date +%s) + 340*60 )); LAST_PUSH=0\nwhile [ \"$(date +%s)\" -lt\
+        \ \"$END\" ]; do\n  if [ \"$(host)\" = server ]; then echo \"switched to the\
+        \ server: pushing my memory and standing down\"; echo server > /tmp/host;\
+        \ LAST_PUSH=-99999; else\n  code\n  PRETRADE_DATA=\"$PWD/bot\" node /tmp/code/bot/musebot.mjs\
+        \ serve --live --segment 5 --poll 20 2>&1 | tee /tmp/seg.log || sleep 30\n\
+        \  cat /tmp/seg.log >> bot/last-run.log; tail -n 300 bot/last-run.log > /tmp/l\
+        \ && mv /tmp/l bot/last-run.log; fi\n  NOW=$(date +%s)\n  OB=$(md5sum bot/outbox.jsonl\
+        \ 2>/dev/null)   # a new draft for the Muse goes out right away\n  if ! grep\
+        \ -q \" 0 replies\\.\" /tmp/seg.log || [ \"$OB\" != \"${LAST_OB:-}\" ] ||\
+        \ [ $(( NOW - LAST_PUSH )) -ge 1800 ]; then\n    LAST_OB=$OB\n    git add\
+        \ -f bot/.state.json bot/last-run.log; test -d bot/ledger && git add -f bot/ledger;\
+        \ test -d bot/radar && git add -f bot/radar; test -f bot/mentions.log && git\
+        \ add -f bot/mentions.log; test -f bot/shadow.log && git add -f bot/shadow.log;\
+        \ test -f bot/outbox.jsonl && git add -f bot/outbox.jsonl; test -f bot/corrections.log\
+        \ && git add -f bot/corrections.log\n    git diff --cached --quiet || { git\
+        \ commit -qm \"state [skip ci]\"; git pull -q --rebase -X theirs || git rebase\
+        \ --abort || true; git push -q || true; }\n    LAST_PUSH=$NOW\n  fi\n  test\
+        \ -f /tmp/host && break\ndone\n"
+    - name: Hand over to the next run
+      if: always()
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: 'RAN=$(( $(date +%s) - $(cat /tmp/started 2>/dev/null || date +%s) ))
+
+        if [ -f /tmp/host ]; then echo "the server is the live bot; not starting a
+        successor"; exit 0; fi
+
+        if [ "$RAN" -lt 120 ]; then echo "Run lasted ${RAN}s: something is wrong,
+        NOT restarting (the hourly watchdog will retry)."; exit 0; fi
+
+        gh workflow run live.yml --ref main && echo "successor started"
+
+        '
+'on':
+  workflow_dispatch: {}
