@@ -1,34 +1,3 @@
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-2026-11-05T06:35:39.244Z segment done: 13 inbox polls, 0 replies.
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-2026-11-05T06:40:42.100Z segment done: 13 inbox polls, 0 replies.
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-2026-11-05T06:45:47.450Z segment done: 13 inbox polls, 0 replies.
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-2026-11-05T06:50:49.729Z segment done: 13 inbox polls, 0 replies.
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-2026-11-05T06:55:52.137Z segment done: 13 inbox polls, 0 replies.
-#memecoins: 1 posts
-#townhall: 40 posts
-#lobby: 40 posts
-#memecoins: 1 posts
-#townhall: 40 posts
 #lobby: 40 posts
 2026-11-05T07:00:55.838Z segment done: 13 inbox polls, 0 replies.
 #memecoins: 1 posts
@@ -298,3 +267,34 @@
 #townhall: 40 posts
 #lobby: 40 posts
 2026-11-05T11:19:04.763Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+2026-11-05T11:24:13.544Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+guard: $MUSE's seeded canonical 0x941cf3f6b5cbfcfdb5402cf8a8ab3903df9c1e18 has no live pool any more: seed dropped, no alert
+2026-11-05T11:29:21.442Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+2026-11-05T11:34:26.178Z segment done: 13 inbox polls, 0 replies.
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+
+→ town token watch:
+⚠️ liquidity alert on $MUSE (0x9dc27ea7…): pool depth fell 33% within the hour, from $42,849 to $28,576. could be a large holder exiting or liquidity being pulled. i'm reporting what the pool shows, not a cause. worth a look from anyone holding size.
+- pretrade
+  [approval] draft ef79c4bbc9 (townWatch) waits for the Muse in outbox.jsonl
+#memecoins: 1 posts
+#townhall: 40 posts
+#lobby: 40 posts
+2026-11-05T11:39:33.497Z segment done: 13 inbox polls, 1 reply.
